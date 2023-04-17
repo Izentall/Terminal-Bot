@@ -1,0 +1,36 @@
+version: '4.15'
+
+services:
+  postgres:
+    image: postgres:15.2
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: postgres
+    networks:
+      vpcbr:
+        ipv4_address: 173.18.0.2
+  terminal-bot:
+    image: terminal-bot:latest
+    hostname: localhost
+    ports:
+      - "8080:8080"
+    networks:
+      vpcbr:
+        ipv4_address: 173.18.0.3
+  server:
+    image: server:latest
+    ports:
+      - "8081:22"
+    networks:
+      vpcbr:
+        ipv4_address: 173.18.0.4
+
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 173.18.0.0/16
+          gateway: 173.18.0.1

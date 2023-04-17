@@ -1,1 +1,6 @@
-/build
+/build/
+/.idea/
+/change-me*
+/ssh/
+/server/ssh/*
+/src/main/resources/application.properties
